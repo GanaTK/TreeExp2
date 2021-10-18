@@ -1,0 +1,78 @@
+body {
+  font-family: Menlo, Consolas, monospace;
+  color: #444;
+}
+
+ul {
+  position: relative;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1.2em;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-flex;
+  padding: 3px;
+  position: absolute;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+textarea {
+  border-style: none;
+  border-color: Transparent;
+  wrap: "hard";
+  width: 100%;
+  max-width: 100%;
+}
+
+.divwidth {
+  float: left;
+  width: 100%;
+}
+
+.column {
+  float: left;
+  width: 75%;
+}
+.columnDate {
+  float: right;
+  border: 1px solid black;
+  font-size: 11px;
+}
+
+.red-box {
+  z-index: 2;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #bb0c0c;
+  bottom: 200px;
+  left: 200px;
+}
+
+.box {
+  display: flex;
+  align-items: flex-start;
+  height: 50px;
+}
+.box > *:first-child {
+  align-self: stretch;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

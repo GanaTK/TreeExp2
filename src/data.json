@@ -1,0 +1,43 @@
+[
+  {
+    "name": "yrirdirdiyrdiydiyrdiyrdiyrdirdirtditrditrditrditrditrditrditrditdirtditrdtrditrditrditrditrditrdirtditrdirtditrditrdityfityfgyhbniouigytresrdtfyguhijiuhygtfrdtesdrtfyugihoijuhiyugtfyrdes5drftyuygiuoiygtfrd6e5sdrftguyhiunbvctxretrcytvuybiunoygtfretdryftugyioytyredryftugyihuojijuhygutredrfytguyhiujiuhiygutfrdesdrftugyhuuhiygutyrtertrytuyiuoouiyutyrterytuy"
+  },
+  {
+    "name": "item2",
+    "isOpen": true,
+    "children": [
+      {
+        "name": "2-item1",
+        "isOpen": true
+      }
+    ]
+  },
+  {
+    "name": "item3",
+    "isOpen": true,
+    "children": [
+      {
+        "name": "3-item1"
+      },
+      {
+        "name": "3-item2",
+        "isOpen": false,
+        "children": [{ "name": "3.2-item 1" }]
+      }
+    ]
+  },
+  {
+    "name": "item4",
+    "isOpen": true,
+    "children": [
+      {
+        "name": "4-item1"
+      },
+      {
+        "name": "4-item2",
+        "isOpen": true,
+        "children": [{ "name": "4.2-item 1" }]
+      }
+    ]
+  }
+]
