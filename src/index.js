@@ -29,7 +29,9 @@ const options = {
 function AddItem({ parent, funcs }) {
   return (
     <li>
-      <TreeLine onClick={() => funcs.addChild(parent)}>+</TreeLine>
+      <TreeLine className="addSign" onClick={() => funcs.addChild(parent)}>
+        +
+      </TreeLine>
     </li>
   );
 }
@@ -38,17 +40,18 @@ function TreeItem({ item, funcs }) {
   const { toggleOpen, makeParent } = funcs;
   return (
     <li>
-      {item.isOpen ? (
-        <i className="arrow down"></i>
-      ) : (
-        <i className="arrow right"></i>
-      )}
+      {item.isOpen ? <i class="fas fa-minus"></i> : <i class="fas fa-plus"></i>}
       &nbsp;
       <TreeLine
         onClick={() => toggleOpen(item)}
         onDoubleClick={() => makeParent(item)}
       >
-        <TextareaAutosize>{item.name}</TextareaAutosize>
+        <div>
+          <span className="spanhead dateAlign">
+            {new Date().toDateString(options)}
+          </span>
+          <TextareaAutosize>{item.name}</TextareaAutosize>
+        </div>
       </TreeLine>
       {item.children && item.isOpen && (
         <TreeList item={item} tree={item.children} funcs={funcs} />
