@@ -16,6 +16,7 @@ const TreeLine = styled.button`
   cursor: pointer;
   outline: inherit;
   width: 80%;
+  text-align: right;
 `;
 
 const options = {
@@ -46,12 +47,10 @@ function TreeItem({ item, funcs }) {
         onClick={() => toggleOpen(item)}
         onDoubleClick={() => makeParent(item)}
       >
-        <div>
-          <span className="spanhead dateAlign">
-            {new Date().toDateString(options)}
-          </span>
-          <TextareaAutosize>{item.name}</TextareaAutosize>
-        </div>
+        <span className="spanhead dateAlign">
+          {new Date().toDateString(options)}
+        </span>
+        <TextareaAutosize>{item.name}</TextareaAutosize>
       </TreeLine>
       {item.children && item.isOpen && (
         <TreeList item={item} tree={item.children} funcs={funcs} />
