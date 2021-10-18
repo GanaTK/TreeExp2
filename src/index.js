@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import "./styles.css";
-import Textarea from "./Textarea";
-const baseTree = require("./data.json");
 import TextareaAutosize from "react-textarea-autosize";
+import { motion } from "framer-motion";
+import { usePositionReorder } from "./usePositionReorder";
+import { useMeasurePosition } from "./useMeasurePosition";
+
+const baseTree = require("./data.json");
 
 const TreeLine = styled.button`
   font-family: Menlo, Consolas, monospace;
@@ -30,47 +33,72 @@ function AddItem({ parent, funcs }) {
   return (
     <li>
       <TreeLine className="addSign" onClick={() => funcs.addChild(parent)}>
-        +
+        &nbsp;&nbsp;&nbsp;+
       </TreeLine>
     </li>
   );
 }
 
-function TreeItem({ item, funcs }) {
-  const { toggleOpen, makeParent } = funcs;
+function TreeItem({ ind, item, funcs }) {
+  const { toggleOpen, makeParent, updatePosition, updateOrder } = funcs;
+  const [isdragged, setIsDragged] = React.useState(false);
+  const itemRef = useMeasurePosition((pos) => updatePosition(ind, pos));
   return (
     <li>
-      <ul id="first" className="ulcl">
-        <li>
-          {item.isOpen ? (
-            <i class="fas fa-minus"></i>
-          ) : (
-            <i class="fas fa-plus"></i>
-          )}
-        </li>
-      </ul>
-      <TreeLine
-        onClick={() => toggleOpen(item)}
-        onDoubleClick={() => makeParent(item)}
+      <motion.div
+        style={{
+          zIndex: isdragged ? 2 : 1,
+          height: name.length * 10
+        }}
+        dragConstraints={{
+          top: 0,
+          bottom: 0
+        }}
+        dragElastic={1}
+        layout
+        ref={itemRef}
+        onDragStart={() => setIsDragged(true)}
+        onDragEnd={() => setIsDragged(false)}
+        animate={{
+          scale: isdragged ? 1.05 : 1
+        }}
+        onViewportBoxUpdate={(_, delta) => {
+          isdragged && updateOrder(ind, delta.y.translate);
+        }}
+        drag="y"
       >
-        <ul id="second" className="ulcls">
+        <ul id="first" className="ulcl">
           <li>
-            <TextareaAutosize className="divwidth">
-              {item.name}
-            </TextareaAutosize>
+            {item.isOpen ? (
+              <i class="fas fa-minus"></i>
+            ) : (
+              <i class="fas fa-plus"></i>
+            )}
           </li>
         </ul>
-        <ul id="third" className="ulcl">
-          <li>
-            <span className="spanhead dateAlign">
-              {new Date().toDateString(options)}
-            </span>
-          </li>
-        </ul>
-      </TreeLine>
-      {item.children && item.isOpen && (
-        <TreeList item={item} tree={item.children} funcs={funcs} />
-      )}
+        <TreeLine
+          onClick={() => toggleOpen(item)}
+          onDoubleClick={() => makeParent(item)}
+        >
+          <ul id="second" className="ulcls">
+            <li>
+              <TextareaAutosize className="divwidth">
+                {item.name}
+              </TextareaAutosize>
+            </li>
+          </ul>
+          <ul id="third" className="ulcl">
+            <li>
+              <span className="spanhead dateAlign">
+                {new Date().toDateString(options)}
+              </span>
+            </li>
+          </ul>
+        </TreeLine>
+        {item.children && item.isOpen && (
+          <TreeList item={item} tree={item.children} funcs={funcs} />
+        )}
+      </motion.div>
     </li>
   );
 }
@@ -79,7 +107,7 @@ function TreeList({ item, tree, funcs }) {
   return (
     <ul>
       {tree.map((child, index) => (
-        <TreeItem key={index} item={child} funcs={funcs} />
+        <TreeItem key={index} ind={index} item={child} funcs={funcs} />
       ))}
       <AddItem parent={item} funcs={funcs} />
     </ul>
@@ -88,6 +116,9 @@ function TreeList({ item, tree, funcs }) {
 
 function App() {
   const [tree, setTree] = useState(baseTree);
+  const [updatedList, updatePosition, updateOrder] = usePositionReorder(
+    baseTree
+  );
 
   const toggleOpen = (item) => {
     const newTree = [...tree];
@@ -112,7 +143,9 @@ function App() {
   const funcs = {
     toggleOpen,
     addChild,
-    makeParent
+    makeParent,
+    updatePosition,
+    updateOrder
   };
   return (
     <div className="App">
