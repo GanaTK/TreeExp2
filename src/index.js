@@ -41,20 +41,28 @@ function TreeItem({ item, funcs }) {
   const { toggleOpen, makeParent } = funcs;
   return (
     <li>
-      {item.isOpen ? <i class="fas fa-minus"></i> : <i class="fas fa-plus"></i>}
+      <ul id="first" className="ulcls">
+        <li>
+          {item.isOpen ? (
+            <i class="fas fa-minus"></i>
+          ) : (
+            <i class="fas fa-plus"></i>
+          )}
+        </li>
+      </ul>
       &nbsp;
       <TreeLine
         onClick={() => toggleOpen(item)}
         onDoubleClick={() => makeParent(item)}
       >
-        <ul id="first" className="ulcls">
+        <ul id="second" className="ulcls">
           <li>
             <TextareaAutosize className="divwidth">
               {item.name}
             </TextareaAutosize>
           </li>
         </ul>
-        <ul id="second" className="ulcls">
+        <ul id="third" className="ulcls">
           <li>
             <span className="spanhead dateAlign">
               {new Date().toDateString(options)}

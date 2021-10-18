@@ -20,7 +20,8 @@ ul {
   text-align: right;
 }
 #first,
-#second {
+#second,
+#third {
   float: left;
 }
 .ulcls {
@@ -98,9 +99,7 @@ textarea {
 }
 
 .box {
-  display: flex;
-  align-items: flex-start;
-  height: 50px;
+  display: inline-flex;
 }
 .box > *:first-child {
   align-self: stretch;
