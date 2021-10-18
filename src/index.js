@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./styles.css";
 import Textarea from "./Textarea";
 const baseTree = require("./data.json");
+import TextareaAutosize from "react-textarea-autosize";
 
 const TreeLine = styled.button`
   font-family: Menlo, Consolas, monospace;
@@ -47,7 +48,7 @@ function TreeItem({ item, funcs }) {
         onClick={() => toggleOpen(item)}
         onDoubleClick={() => makeParent(item)}
       >
-        <Textarea>{item.name}</Textarea>
+        <TextareaAutosize>{item.name}</TextareaAutosize>
       </TreeLine>
       {item.children && item.isOpen && (
         <TreeList item={item} tree={item.children} funcs={funcs} />
