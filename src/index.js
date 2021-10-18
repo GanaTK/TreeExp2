@@ -47,10 +47,20 @@ function TreeItem({ item, funcs }) {
         onClick={() => toggleOpen(item)}
         onDoubleClick={() => makeParent(item)}
       >
-        <span className="spanhead dateAlign">
-          {new Date().toDateString(options)}
-        </span>
-        <TextareaAutosize>{item.name}</TextareaAutosize>
+        <ul id="first" className="ulcls">
+          <li>
+            <TextareaAutosize className="divwidth">
+              {item.name}
+            </TextareaAutosize>
+          </li>
+        </ul>
+        <ul id="second" className="ulcls">
+          <li>
+            <span className="spanhead dateAlign">
+              {new Date().toDateString(options)}
+            </span>
+          </li>
+        </ul>
       </TreeLine>
       {item.children && item.isOpen && (
         <TreeList item={item} tree={item.children} funcs={funcs} />

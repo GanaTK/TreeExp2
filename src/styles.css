@@ -11,12 +11,25 @@ ul {
 }
 
 .divwidth {
-  width: 100%;
+  float: left;
 }
 .spanhead {
+  display: inline-block;
   background-color: #e5dcc3;
   width: 100%;
   text-align: right;
+}
+#first,
+#second {
+  float: left;
+}
+.ulcls {
+  list-style-type: none;
+}
+
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
 }
 
 .addSign {
