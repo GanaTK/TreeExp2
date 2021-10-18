@@ -18,6 +18,7 @@ ul {
   background-color: #e5dcc3;
   width: 100%;
   text-align: right;
+  font-size: 10px;
 }
 #first,
 #second,
@@ -25,6 +26,11 @@ ul {
   float: left;
 }
 .ulcls {
+  list-style-type: none;
+  width: 70%;
+}
+
+.ulcl {
   list-style-type: none;
 }
 

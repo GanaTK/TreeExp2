@@ -16,7 +16,6 @@ const TreeLine = styled.button`
   cursor: pointer;
   outline: inherit;
   width: 80%;
-  text-align: right;
 `;
 
 const options = {
@@ -41,7 +40,7 @@ function TreeItem({ item, funcs }) {
   const { toggleOpen, makeParent } = funcs;
   return (
     <li>
-      <ul id="first" className="ulcls">
+      <ul id="first" className="ulcl">
         <li>
           {item.isOpen ? (
             <i class="fas fa-minus"></i>
@@ -50,7 +49,6 @@ function TreeItem({ item, funcs }) {
           )}
         </li>
       </ul>
-      &nbsp;
       <TreeLine
         onClick={() => toggleOpen(item)}
         onDoubleClick={() => makeParent(item)}
@@ -62,7 +60,7 @@ function TreeItem({ item, funcs }) {
             </TextareaAutosize>
           </li>
         </ul>
-        <ul id="third" className="ulcls">
+        <ul id="third" className="ulcl">
           <li>
             <span className="spanhead dateAlign">
               {new Date().toDateString(options)}
